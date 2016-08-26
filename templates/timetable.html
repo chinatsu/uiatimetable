@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+    <title>Universitetet i Agder</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="http://timeplan.uia.no/swsuiah/css/xmlreports.css" />
+</head>
+<body>
+    <p><img src="http://timeplan.uia.no/swsuiah/images/uia_template_logo.gif" /></p>
+    <p class="title"><i>IT og informasjonssystemer Bachelor 1.år</i></p>
+    {% for week in weeks %}
+    <table>
+        <tr class="tr1">
+            <td class="td1" colspan="3">Uke {{ week }}, 2016</td>
+            <td class="td2">Aktivitet</td>
+            <td class="td3">Rom</td>
+            <td class="td4">Foreleser</td>
+            <td class="td5" />
+        </tr>
+        {% for w in weeks[week] %}
+        <tr class="tr2">
+            <td class="td1_1">{{ w['weekday'] }}</td>
+            <td class="td1_2">{{ w['date'] }}</td>
+            <td class="td1_3">{{ w['time'] }}</td>
+            <td>{{ w['details'] }}</td>
+            <td>{{ w['location'] }}</td>
+            <td>{{ w['lecturer'] }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p />
+    {% endfor %}
+</body>
