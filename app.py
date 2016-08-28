@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config["response"] = scrape.get_timetable(['IS-100', 'IS-104', 'IS-109', 'IS-111']) # initialize response
 app.config['timestamp'] = arrow.now() # set a timestamp, i like arrow because it's easy
 
-@app.route('/timeplan')
+@app.route('/timeplan/')
 def load_schedule():
     if app.config['timestamp'] < arrow.now().replace(hours=-6):
         app.config["response"] = scrape.get_timetable(['IS-100', 'IS-104', 'IS-109', 'IS-111'])

@@ -31,6 +31,9 @@ def get_timetable(courses):
                 data['location'] = z[4].text
                 data['lecturer'] = z[5].text
                 weeks[week].append(data) # append our data to the appropriate week
-    for x in weeks:
-        weeks[x] = sorted(weeks[x], key=lambda y: y['datetime']) # i love lexical sorting
+    for x in list(weeks):
+        if x < arrow.utcnow().to('Europe/Oslo').isocalendar()[1]:
+            weeks.pop(x) # remove all past weeks
+        else:
+            weeks[x] = sorted(weeks[x], key=lambda y: y['datetime']) # i love lexical sorting
     return weeks
