@@ -1,4 +1,5 @@
 import requests
+import arrow
 from bs4 import BeautifulSoup
 
 def get_course(course):
@@ -23,7 +24,9 @@ def get_timetable(courses):
             for entry in tr2:
                 data = {}
                 z = entry.find_all('td') # each td has a set format with important data
-                data['datetime'] = "{} {}".format(z[1].text, z[2].text) # used for sorting later
+                data['datetime'] = arrow.Arrow.strptime(
+                                      '{} {}'.format(z[1].text, z[2].text.split('-')[0]),
+                                      '%d %b %H.%M') # we need an Arrow object to sort nicely
                 data['weekday'] = z[0].text
                 data['date'] = z[1].text
                 data['time'] = z[2].text
@@ -35,5 +38,5 @@ def get_timetable(courses):
         if x < arrow.utcnow().to('Europe/Oslo').isocalendar()[1]:
             weeks.pop(x) # remove all past weeks
         else:
-            weeks[x] = sorted(weeks[x], key=lambda y: y['datetime']) # i love lexical sorting
+            weeks[x] = sorted(weeks[x], key=lambda y: y['datetime'])
     return weeks
