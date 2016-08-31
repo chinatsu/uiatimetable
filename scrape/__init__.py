@@ -1,5 +1,6 @@
 import requests
 import arrow
+from dateutil import tz
 from bs4 import BeautifulSoup
 
 def get_course(course):
@@ -25,8 +26,8 @@ def get_timetable(courses):
                 data = {}
                 z = entry.find_all('td') # each td has a set format with important data
                 data['datetime'] = arrow.Arrow.strptime(
-                                      '{} {}'.format(z[1].text, z[2].text.split('-')[0]),
-                                      '%d %b %H.%M') # we need an Arrow object to sort nicely
+                                       '{} {} 2016'.format(z[1].text, z[2].text.split('-')[1]),
+                                       '%d %b %H.%M %Y', tzinfo=tz.gettz('Europe/Oslo'))
                 data['weekday'] = z[0].text
                 data['date'] = z[1].text
                 data['time'] = z[2].text
@@ -36,7 +37,7 @@ def get_timetable(courses):
                 weeks[week].append(data) # append our data to the appropriate week
     for x in list(weeks):
         if x < arrow.utcnow().to('Europe/Oslo').isocalendar()[1]:
-            weeks.pop(x) # remove all past weeks
+            weeks.pop(x)
         else:
             weeks[x] = sorted(weeks[x], key=lambda y: y['datetime'])
     return weeks

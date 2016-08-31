@@ -1,12 +1,18 @@
 <!doctype html>
 <head>
-    <title>Universitetet i Agder</title>
+    <title>Timeplan for IT og informasjonssystemer Bachelor 1.Ã¥r</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="http://timeplan.uia.no/swsuiah/css/xmlreports.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Muli:300|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <link href="http://cute.enterprises/res/css/master.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    <p><img src="http://timeplan.uia.no/swsuiah/images/uia_template_logo.gif" /></p>
-    <p class="title"><i>IT og informasjonssystemer Bachelor 1.år</i></p>
+    <div id="links">
+        <a class="link" href="http://www.uia.no/student/fronter" >Fronter</a>
+        <a class="link" href="http://timeplan.uia.no/swsuiah/public/no/default.aspx" >timeplan.uia.no</a>
+        <a class="link" href="https://github.com/chinatsu/uiatimetable" >Kildekode</a>
+    </div>
+    <div id="container2">
     {% for week in weeks %}
     <table>
         <tr class="tr1">
@@ -28,6 +34,6 @@
         </tr>
         {% endfor %}
     </table>
-    <p />
     {% endfor %}
+    </div>
 </body>

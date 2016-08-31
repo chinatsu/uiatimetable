@@ -11,6 +11,10 @@ def load_schedule():
     if app.config['timestamp'] < arrow.now().replace(hours=-6):
         app.config["response"] = scrape.get_timetable(['IS-100', 'IS-104', 'IS-109', 'IS-111'])
         app.config['timestamp'] = arrow.now()
+    currentweek = arrow.now().to('Europe/Oslo').isocalendar()[1]
+    firstweek = app.config['response'][currentweek]
+    app.config['response'][currentweek] = [x for x in firstweek if not
+                                           (arrow.now().to('Europe/Oslo') > x['datetime'])]
     return render_template('timetable.html', weeks=app.config['response']) # render the response!
 
 if __name__ == '__main__':
