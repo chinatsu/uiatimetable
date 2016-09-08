@@ -15,7 +15,7 @@ def load_schedule():
     firstweek = app.config['response'][currentweek]
     app.config['response'][currentweek] = [x for x in firstweek if not
                                            (arrow.now().to('Europe/Oslo') > x['datetime'])]
-    return render_template('timetable.html', weeks=app.config['response']) # render the response!
+    return render_template('timetable.html', weeks=app.config['response'])
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=3000, debug=True)
