@@ -1,21 +1,14 @@
-<!doctype html>
-<head>
-    <title>Timeplan for IT og informasjonssystemer Bachelor 1.år</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Muli:300|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
-    <link href="http://cute.enterprises/res/css/master.css" type="text/css" rel="stylesheet"/>
-</head>
-<body>
-    <div id="links">
-        <a class="link" href="http://www.uia.no/student/fronter" >Fronter</a>
+{% extends "base.html" %}
+{% block title %}Timeplan for {{ studytitle }}{% endblock %}
+{% block links %}
+        <a class="link" href="https://fronter.com/uia/login/feide" >Fronter</a>
         <a class="link" href="http://timeplan.uia.no/swsuiah/public/no/default.aspx" >timeplan.uia.no</a>
         <a class="link" href="https://github.com/chinatsu/uiatimetable" >Kildekode</a>
-    </div>
-    <div id="container2">
+{% endblock %}
+{% block content %}
     {% for week in weeks %}
     {% if weeks[week]|length > 0 %}
-    <table>
+    <table data-aos="fade">
         <tr class="tr1">
             <td class="td1">Uke {{ week }}, 2016</td>
             <td class="td2">Aktivitet</td>
@@ -33,5 +26,4 @@
     </table>
     {% endif %}
     {% endfor %}
-    </div>
-</body>
+{% endblock %}

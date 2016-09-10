@@ -1,23 +1,24 @@
+import pickle
 import requests
 import arrow
 from dateutil import tz
 from bs4 import BeautifulSoup
 
+PICKLE_DIR = 'pickles/'
+
 def get_course(course):
     return BeautifulSoup(requests.get('http://timeplan.uia.no/swsuiah/XMLEngine/default.aspx?ModuleByWeek&' +
-                                      'p1=;{}-1;&p2=32;33;34;35;36;37;38;39;'.format(course) +
+                                      'p1=;{};&p2=32;33;34;35;36;37;38;39;'.format(course) +
                                       '40;41;42;43;44;45;46;47;48;49;50;51').text, 'lxml')
 
 def get_timetable(courses):
     soups = []
     for course in courses:
-        soups.append(get_course(course)) # populate our list with each course's timetable
+        soups.append(get_course(course))
 
     weeks = {}
-    for soup in soups[0].find_all('table'):
-        week = int(soup.find('td').text.split(' ')[1][:-1]) # get the current week number
-        weeks[week] = [] # initialize each week in our weeks dictionary
-
+    for x in range(32, 52):
+        weeks[x] = []
     for soup in soups:
         for x in soup.find_all('table'): # each table is a week
             week = int(x.find('td').text.split(' ')[1][:-1]) # return of the hacky integer
@@ -41,3 +42,11 @@ def get_timetable(courses):
         else:
             weeks[x] = sorted(weeks[x], key=lambda y: y['datetime'])
     return weeks
+
+def pickle_timetable(timetable, name):
+    with open(PICKLE_DIR + name, 'wb') as f:
+        pickle.dump(timetable, f)
+
+def get_pickle(name):
+    with open(PICKLE_DIR + name, 'rb') as f:
+        return pickle.load(f)

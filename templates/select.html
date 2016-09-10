@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Timeplaner - UiA{% endblock %}
+{% block script %}
+<script src="http://cute.enterprises/res/js/list.fuzzysearch.min.js" data-no-instant></script>
+<script src="http://cute.enterprises/res/js/list.min.js" data-no-instant></script>
+{% endblock %}
+{% block links %}
+    <a class="link" href="https://fronter.com/uia/login/feide" >Fronter</a>
+    <a class="link" href="http://timeplan.uia.no/swsuiah/public/no/default.aspx" >timeplan.uia.no</a>
+    <a class="link" href="https://github.com/chinatsu/uiatimetable" >Kildekode</a>
+{% endblock %}
+{% block content %}
+    <input type="search" class="fuzzy-search" />
+    <div class="list">
+    {% for course in names %}
+        <a class="courselink" href="http://cute.enterprises/timeplan/{{ course }}"><p class="course">{{ courses[course]['title'] }}</p>
+    {% endfor %}
+    </div>
+{% endblock %}
+{% block footer %}
+<script data-no-instant>
+var options = {
+  valueNames: ['course'],
+  plugins: [ ListFuzzySearch() ]
+};
+
+var listObj = new List('container', options);
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Muli:300|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <link href="http://cute.enterprises/res/css/master.css" type="text/css" rel="stylesheet"/>
+    <link href="http://cute.enterprises/res/css/small.css" type="text/css" rel="stylesheet" media="(max-width: 760px)"/>
+    <link href="http://cute.enterprises/res/css/big.css" type="text/css" rel="stylesheet" media="(min-width: 760px)"/>
+    <link rel="stylesheet" href="http://cute.enterprises/res/bower_components/aos/dist/aos.css" />
+    <script src="http://cute.enterprises/res/bower_components/aos/dist/aos.js"></script>
+    {% block script %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="links">
+        {% block links %}{% endblock %}
+    </div>
+    <div id="container">
+        {% block content %}{% endblock %}
+    </div>
+<script>AOS.init();</script>
+<script src="http://cute.enterprises/res/js/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init(100);</script>
+{% block footer %}
+{% endblock %}
+</body>
+</html>
